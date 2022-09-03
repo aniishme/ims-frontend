@@ -3,10 +3,15 @@ import React, { useState } from "react";
 function Login() {
   const [formData, setFormData] = useState({ username: "", password: "" });
 
-  const handleOnchange = (e: any) => {
+  const handleOnchange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  console.log(formData);
+
+  const handleSubmit = (e: React.MouseEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    console.log(formData);
+  };
+
   return (
     <div className="login-wrapper">
       <h1>Login</h1>
@@ -28,6 +33,8 @@ function Login() {
           value={formData.password}
           onChange={(e) => handleOnchange(e)}
         />
+        <br />
+        <input type="button" value="Log In" onClick={(e) => handleSubmit(e)} />
       </form>
     </div>
   );
