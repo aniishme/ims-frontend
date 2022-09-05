@@ -1,4 +1,7 @@
+import axios from "axios";
 import React, { useState } from "react";
+
+import { loginHandler } from "../services/auth.service";
 
 function Login() {
   const [formData, setFormData] = useState({ username: "", password: "" });
@@ -7,9 +10,9 @@ function Login() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.MouseEvent<HTMLInputElement>) => {
+  const handleSubmit = async (e: React.MouseEvent<HTMLInputElement>) => {
     e.preventDefault();
-    console.log(formData);
+    const res = loginHandler(formData);
   };
 
   return (
