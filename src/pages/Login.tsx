@@ -1,18 +1,19 @@
-import axios from "axios";
 import React, { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
 
 import { loginHandler } from "../services/auth.service";
 
 function Login() {
   const [formData, setFormData] = useState({ username: "", password: "" });
 
+  const { mutate: login, isLoading } = useMutation(loginHandler);
   const handleOnchange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e: React.MouseEvent<HTMLInputElement>) => {
     e.preventDefault();
-    const res = loginHandler(formData);
+    login(formData);
   };
 
   return (
@@ -37,7 +38,12 @@ function Login() {
           onChange={(e) => handleOnchange(e)}
         />
         <br />
-        <input type="button" value="Log In" onClick={(e) => handleSubmit(e)} />
+        <input
+          type="button"
+          value={isLoading ? "Logging In" : "Login"}
+          disabled={isLoading}
+          onClick={(e) => handleSubmit(e)}
+        />
       </form>
     </div>
   );
