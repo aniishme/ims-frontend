@@ -15,14 +15,17 @@ export interface AuthContextType {
 export const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }: PropType) => {
-  const { data, isLoading } = useQuery(["auth"], isLoggedIn);
+  const { data, isLoading, isError } = useQuery(["auth"], isLoggedIn);
   const [auth, setAuth] = useState<boolean>(false);
 
   useEffect(() => {
     if (data?.status === 200) {
       setAuth(true);
     }
-  });
+    if (isError) {
+      setAuth(false);
+    }
+  }, [data, isError]);
   return (
     <AuthContext.Provider value={{ auth, setAuth, isLoading }}>
       {children}
