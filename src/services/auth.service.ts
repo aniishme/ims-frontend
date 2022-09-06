@@ -12,3 +12,9 @@ export const loginHandler = async (data: LoginData) => {
 
   return res;
 };
+
+export const isLoggedIn = async () => {
+  return await axios.get("http://localhost:8000/auth/me", {
+    withCredentials: true,
+  });
+};
