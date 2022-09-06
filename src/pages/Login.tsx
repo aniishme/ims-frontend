@@ -1,66 +1,94 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useMutation } from "@tanstack/react-query";
 import Cookies from "universal-cookie";
 
-import { loginHandler } from "../services/auth.service";
 import { Navigate } from "react-router-dom";
 import { AxiosError } from "axios";
 
+import {
+  TextInput,
+  Button,
+  Group,
+  Box,
+  PasswordInput,
+  Title,
+  Loader,
+  Text,
+} from "@mantine/core";
+import { useForm } from "@mantine/form";
+
+import { loginHandler } from "../services/auth.service";
+
+type FormData = {
+  username: string;
+  password: string;
+};
+
 function Login() {
   const cookie = new Cookies();
-  const [formData, setFormData] = useState({ username: "", password: "" });
-  const [isAuth, setIsAuth] = useState(false);
 
-  const { mutateAsync: login, isLoading } = useMutation(loginHandler);
-  const handleOnchange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e: React.MouseEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    login(formData, {
-      onSuccess: () => cookie.set("auth", true, { path: "/" }),
-      onError: (err) => {
-        if (err instanceof AxiosError) {
-          console.log(err.response?.data.message);
-        }
+  const form = useForm({
+    initialValues: {
+      username: "",
+      password: "",
+    },
+    validate: {
+      username: (value) => {
+        if (!value) return "Username is required";
       },
+      password: (value) => {
+        if (!value) return "Password is required";
+      },
+    },
+  });
+
+  const {
+    mutateAsync: login,
+    isLoading,
+    isError,
+    error,
+  } = useMutation(loginHandler);
+
+  const handleSubmit = async (data: FormData) => {
+    login(data, {
+      onSuccess: () => cookie.set("auth", true, { path: "/" }),
     });
   };
 
   if (cookie.get("auth")) {
     return <Navigate to="/" />;
   }
+
   return (
-    <div className="login-wrapper">
-      <h1>Login</h1>
-      <form className="login">
-        <label htmlFor="username">Username</label>
-        <input
-          type="text"
-          name="username"
-          id="username"
-          value={formData.username}
-          onChange={(e) => handleOnchange(e)}
+    <Box sx={{ maxWidth: 300 }} mx="auto">
+      <Title order={3} mb={20} my={50}>
+        Log In
+      </Title>
+      <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
+        <TextInput
+          withAsterisk
+          label="Username"
+          placeholder="your@email.com"
+          {...form.getInputProps("username")}
         />
-        <br />
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          value={formData.password}
-          onChange={(e) => handleOnchange(e)}
+
+        <PasswordInput
+          withAsterisk
+          mt="md"
+          label="Password"
+          placeholder="********"
+          {...form.getInputProps("password")}
         />
-        <br />
-        <input
-          type="button"
-          value={isLoading ? "Logging In" : "Login"}
-          disabled={isLoading}
-          onClick={(e) => handleSubmit(e)}
-        />
+        {isError && (
+          <Text color="red">
+            {error instanceof AxiosError && error.response?.data.message}
+          </Text>
+        )}
+        <Group position="right" mt="md">
+          {isLoading ? <Loader /> : <Button type="submit">Log In</Button>}
+        </Group>
       </form>
-    </div>
+    </Box>
   );
 }
 
