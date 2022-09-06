@@ -81,7 +81,10 @@ function Login() {
         />
         {isError && (
           <Text color="red">
-            {error instanceof AxiosError && error.response?.data.message}
+            {error instanceof AxiosError &&
+              (error.message == "Network Error"
+                ? "Can't connect to the network"
+                : error.response?.data?.message)}
           </Text>
         )}
         <Group position="right" mt="md">
