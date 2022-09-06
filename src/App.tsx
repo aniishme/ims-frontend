@@ -1,13 +1,19 @@
 import "./App.css";
 import Login from "./pages/Login";
-import { useQuery } from "@tanstack/react-query";
 import { Route, Routes } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
-import { isLoggedIn } from "./services/auth.service";
+import { useContext } from "react";
+import { AuthContext, AuthContextType } from "./context/AuthContext";
 import { Loader } from "@mantine/core";
 
 function App() {
+  const { isLoading } = useContext(AuthContext) as AuthContextType;
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
     <div className="App">
       <Routes>
