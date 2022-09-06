@@ -9,12 +9,13 @@ type PropType = {
 export interface AuthContextType {
   auth: boolean;
   setAuth: (auth: boolean) => void;
+  isLoading: boolean;
 }
 
 export const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }: PropType) => {
-  const { data, isError, isLoading } = useQuery(["auth"], isLoggedIn);
+  const { data, isLoading } = useQuery(["auth"], isLoggedIn);
   const [auth, setAuth] = useState<boolean>(false);
 
   useEffect(() => {
