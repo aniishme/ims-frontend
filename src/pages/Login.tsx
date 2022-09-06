@@ -1,8 +1,8 @@
-import React from "react";
-import { useMutation } from "@tanstack/react-query";
+import React, { useContext, useEffect } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Cookies from "universal-cookie";
 
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
 
 import {
@@ -19,13 +19,22 @@ import { useForm } from "@mantine/form";
 
 import { loginHandler } from "../services/auth.service";
 
+import { AuthContext, AuthContextType } from "../context/AuthContext";
+
 type FormData = {
   username: string;
   password: string;
 };
 
 function Login() {
-  const cookie = new Cookies();
+  const { auth, setAuth } = useContext(AuthContext) as AuthContextType;
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (auth) {
+      navigate("/");
+    }
+  }, [auth]);
 
   const form = useForm({
     initialValues: {
@@ -51,13 +60,9 @@ function Login() {
 
   const handleSubmit = async (data: FormData) => {
     login(data, {
-      onSuccess: () => cookie.set("auth", true, { path: "/" }),
+      onSuccess: () => setAuth(true),
     });
   };
-
-  if (cookie.get("auth")) {
-    return <Navigate to="/" />;
-  }
 
   return (
     <Box sx={{ maxWidth: 300 }} mx="auto">
