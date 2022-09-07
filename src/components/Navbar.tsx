@@ -14,7 +14,7 @@ function Navbar() {
       </div>
       <div className="nav-user">
         <p>
-          {user.username} | {user.role.toLowerCase()}
+          {user?.username} | {user?.role?.toLowerCase()}
         </p>
       </div>
     </div>
