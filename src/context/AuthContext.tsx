@@ -6,10 +6,18 @@ type PropType = {
   children: React.ReactNode;
 };
 
+type User = {
+  id: string;
+  name: string;
+  username: string;
+  role: string;
+};
+
 export interface AuthContextType {
   auth: boolean;
   setAuth: (auth: boolean) => void;
   isLoading: boolean;
+  user: User;
 }
 
 export const AuthContext = createContext({});
@@ -24,7 +32,9 @@ export const AuthProvider = ({ children }: PropType) => {
     }
   }, [isSuccess]);
   return (
-    <AuthContext.Provider value={{ auth, setAuth, isLoading }}>
+    <AuthContext.Provider
+      value={{ auth, setAuth, isLoading, user: data?.data }}
+    >
       {children}
     </AuthContext.Provider>
   );
