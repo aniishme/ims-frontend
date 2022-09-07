@@ -1,0 +1,26 @@
+body {
+  font-family: "Courier New", Courier, monospace;
+}
+.navbar {
+  display: flex;
+  padding: 15px 50px;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(44, 41, 41);
+  color: white;
+  font-weight: 700;
+}
+
+.navbar .nav-links {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 40%;
+}
+
+.navbar .nav-links a {
+  text-decoration: none;
+  color: white;
+  margin-right: 5px;
+}
