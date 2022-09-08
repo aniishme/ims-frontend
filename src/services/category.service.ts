@@ -1,4 +1,4 @@
-import axios from "axios";
+import { api } from "../utils/api";
 
 export type CategoryData = {
   name: string;
@@ -9,31 +9,21 @@ type CategoryDataWithId = CategoryData & {
 };
 
 export const getCategory = async () => {
-  const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/category/`, {
-    withCredentials: true,
-  });
+  const res = await api.get("/category/");
 
   return res;
 };
 
 export const addCategory = async (data: CategoryData) => {
-  const res = axios.post(`${import.meta.env.VITE_BASE_URL}/category/`, data, {
-    withCredentials: true,
-  });
+  const res = api.post("/category/", data);
 
   return res;
 };
 
 export const editCategory = async (data: CategoryDataWithId) => {
-  const res = axios.put(
-    `${import.meta.env.VITE_BASE_URL}/category/${data.id}`,
-    {
-      name: data.name,
-    },
-    {
-      withCredentials: true,
-    }
-  );
+  const res = api.put(`/category/${data.id}`, {
+    name: data.name,
+  });
 
   return res;
 };
