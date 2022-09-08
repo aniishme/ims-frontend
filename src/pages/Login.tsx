@@ -28,7 +28,7 @@ type FormData = {
 
 function Login() {
   const queryClient = useQueryClient();
-  const { auth, setAuth } = useContext(AuthContext) as AuthContextType;
+  const { auth } = useContext(AuthContext) as AuthContextType;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -62,7 +62,6 @@ function Login() {
   const handleSubmit = async (data: FormData) => {
     login(data, {
       onSuccess: () => {
-        setAuth(true);
         queryClient.invalidateQueries(["auth"]);
       },
     });
