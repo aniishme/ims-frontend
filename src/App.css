@@ -40,3 +40,19 @@ body {
   background-color: rgba(0, 255, 255, 0.4);
   cursor: pointer;
 }
+
+.category {
+  padding: 15px 50px;
+  height: 100vh;
+}
+
+.category .category-list-item {
+  cursor: pointer;
+}
+.category .category-list-item button {
+  margin-right: 10px;
+}
+.category .category-list-item a {
+  color: inherit;
+  text-decoration: none;
+}
