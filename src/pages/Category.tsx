@@ -1,9 +1,10 @@
 import { Button, Loader, Table } from "@mantine/core";
-import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 
 import Navbar from "../components/Navbar";
+import ManageCategory from "../context/ManageCategory";
+
 import {
   CategoryContext,
   CategoryContextType,
@@ -13,12 +14,14 @@ function Category() {
   const { isLoading, isSuccess, data } = useContext(
     CategoryContext
   ) as CategoryContextType;
+
   return (
     <>
       <Navbar />
-      {isLoading && <Loader />}
-      {isSuccess && (
-        <div className="category">
+      <div className="category">
+        <ManageCategory />
+        {isLoading && <Loader />}
+        {isSuccess && (
           <Table verticalSpacing={"md"} striped highlightOnHover>
             <thead>
               <tr>
@@ -48,8 +51,8 @@ function Category() {
               })}
             </tbody>
           </Table>
-        </div>
-      )}
+        )}
+      </div>
     </>
   );
 }
