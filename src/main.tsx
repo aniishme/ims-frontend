@@ -12,6 +12,7 @@ import { CategoryProvider } from "./context/CategoryContext";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
+      refetchOnReconnect: true,
       refetchOnWindowFocus: false,
       retry: 1,
     },

@@ -31,6 +31,7 @@ export const AuthProvider = ({ children }: PropType) => {
       setAuth(true);
     }
   }, [isSuccess]);
+  
   return (
     <AuthContext.Provider
       value={{ auth, setAuth, isLoading, user: data?.data }}
