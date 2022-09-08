@@ -1,5 +1,5 @@
 import { Button, Loader, Table } from "@mantine/core";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 
 import Navbar from "../components/Navbar";
@@ -9,6 +9,7 @@ import {
   CategoryContext,
   CategoryContextType,
 } from "../context/CategoryContext";
+import CategoryTableRow from "../components/CategoryTableRow";
 
 function Category() {
   const { isLoading, isSuccess, data } = useContext(
@@ -34,19 +35,11 @@ function Category() {
             <tbody>
               {data?.map((category: any, index: number) => {
                 return (
-                  <tr key={category.id} className="category-list-item">
-                    <td>{index + 1}</td>
-                    <td>
-                      <Link to={`/category/${category.id}`}>
-                        {category.name}
-                      </Link>
-                    </td>
-                    <td>{category.items.length}</td>
-                    <td>
-                      <Button color="blue">Edit</Button>
-                      <Button color="red">Delete</Button>
-                    </td>
-                  </tr>
+                  <CategoryTableRow
+                    category={category}
+                    index={index}
+                    key={category.id}
+                  />
                 );
               })}
             </tbody>
