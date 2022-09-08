@@ -7,6 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import App from "./App";
 import "./index.css";
+import { CategoryProvider } from "./context/CategoryContext";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -21,9 +22,11 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
+        <CategoryProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </CategoryProvider>
       </AuthProvider>
     </QueryClientProvider>
   </React.StrictMode>
