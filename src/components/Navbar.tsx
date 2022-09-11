@@ -1,9 +1,8 @@
-import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { AuthContext, AuthContextType } from "../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 
 function Navbar() {
-  const { user } = useContext(AuthContext) as AuthContextType;
+  const { user } = useAuth();
   return (
     <div className="navbar">
       <div className="nav-links">

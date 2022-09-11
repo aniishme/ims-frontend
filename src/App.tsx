@@ -3,13 +3,12 @@ import Login from "./pages/Login";
 import { Route, Routes } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
-import { useContext } from "react";
-import { AuthContext, AuthContextType } from "./context/AuthContext";
 import { Loader } from "@mantine/core";
 import Category from "./pages/Category";
+import { useAuth } from "./context/AuthContext";
 
 function App() {
-  const { isLoading } = useContext(AuthContext) as AuthContextType;
+  const { isLoading } = useAuth();
 
   if (isLoading) {
     return <Loader />;

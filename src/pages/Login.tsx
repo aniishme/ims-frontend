@@ -19,7 +19,7 @@ import { useForm } from "@mantine/form";
 
 import { loginHandler } from "../services/auth.service";
 
-import { AuthContext, AuthContextType } from "../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 
 type FormData = {
   username: string;
@@ -28,14 +28,14 @@ type FormData = {
 
 function Login() {
   const queryClient = useQueryClient();
-  const { auth } = useContext(AuthContext) as AuthContextType;
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
+  const { isSuccess } = useAuth();
   useEffect(() => {
-    if (auth) {
+    if (isSuccess) {
       navigate("/");
     }
-  }, [auth]);
+  }, []);
 
   const form = useForm({
     initialValues: {
