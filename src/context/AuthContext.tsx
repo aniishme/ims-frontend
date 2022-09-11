@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { isLoggedIn } from "../services/auth.service";
 
 type PropType = {
@@ -14,28 +14,29 @@ type User = {
 };
 
 export interface AuthContextType {
-  auth: boolean;
-  setAuth: (auth: boolean) => void;
+  isSuccess: boolean;
   isLoading: boolean;
+  isError: boolean;
   user: User;
 }
 
 export const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }: PropType) => {
-  const { data, isLoading, isSuccess } = useQuery(["auth"], isLoggedIn);
-  const [auth, setAuth] = useState<boolean>(false);
+  const { data, isLoading, isSuccess, isError } = useQuery(
+    ["auth"],
+    isLoggedIn
+  );
 
-  useEffect(() => {
-    if (isSuccess) {
-      setAuth(true);
-    }
-  }, [isSuccess]);
   return (
     <AuthContext.Provider
-      value={{ auth, setAuth, isLoading, user: data?.data }}
+      value={{ isSuccess, isError, isLoading, user: data?.data }}
     >
       {children}
     </AuthContext.Provider>
   );
+};
+
+export const useAuth = () => {
+  return useContext(AuthContext) as AuthContextType;
 };
