@@ -27,3 +27,9 @@ export const editCategory = async (data: CategoryDataWithId) => {
 
   return res;
 };
+
+export const deleteCategory = async (data: { id: number }) => {
+  const res = api.delete(`/category/${data.id}`);
+
+  return res;
+};
