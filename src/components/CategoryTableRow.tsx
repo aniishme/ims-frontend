@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { editCategory } from "../services/category.service";
+import { deleteCategory, editCategory } from "../services/category.service";
 
 type PropType = {
   category: any;
@@ -22,6 +22,8 @@ function CategoryTableRow({ category, index }: PropType) {
     isLoading,
   } = useMutation(editCategory);
 
+  const handleDeleteCategory = useMutation(deleteCategory);
+
   const handleSumbit = () => {
     console.log(editValue);
     handleEditCategory(
@@ -29,6 +31,17 @@ function CategoryTableRow({ category, index }: PropType) {
       {
         onSuccess: () => {
           setEditState(false);
+          queryClient.invalidateQueries(["get-category"]);
+        },
+      }
+    );
+  };
+
+  const handleDelete = () => {
+    handleDeleteCategory.mutateAsync(
+      { id: category.id },
+      {
+        onSuccess: () => {
           queryClient.invalidateQueries(["get-category"]);
         },
       }
@@ -70,7 +83,9 @@ function CategoryTableRow({ category, index }: PropType) {
         >
           {editState ? "Exit" : "Edit"}
         </Button>
-        <Button color="red">Delete</Button>
+        <Button color="red" onClick={handleDelete}>
+          Delete
+        </Button>
       </td>
       {isError &&
         error instanceof AxiosError &&
