@@ -14,3 +14,7 @@ export const loginHandler = async (data: LoginData) => {
 export const isLoggedIn = async () => {
   return await api.get("/auth/me");
 };
+
+export const logout = async () => {
+  return await api.get("/auth/logout");
+};
