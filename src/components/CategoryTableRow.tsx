@@ -69,7 +69,7 @@ function CategoryTableRow({ category, index }: PropType) {
               ))}
           </div>
         ) : (
-          <Link to={`/category/${category.id}`}>{category.name}</Link>
+          <Link to={`/categories/${category.id}`}>{category.name}</Link>
         )}
       </td>
       <td>{category.items.length}</td>

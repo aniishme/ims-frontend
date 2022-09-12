@@ -1,6 +1,6 @@
 import { Button, Loader, Table } from "@mantine/core";
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 import Navbar from "../components/Navbar";
 import ManageCategory from "../components/ManageCategory";
@@ -46,6 +46,7 @@ function Category() {
           </Table>
         )}
       </div>
+      <Outlet />
     </>
   );
 }

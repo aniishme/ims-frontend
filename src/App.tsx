@@ -6,6 +6,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import { Loader } from "@mantine/core";
 import Category from "./pages/Category";
 import { useAuth } from "./context/AuthContext";
+import CategoryView from "./pages/CategoryView";
 
 function App() {
   const { isLoading } = useAuth();
@@ -20,6 +21,7 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route path="/" element={<Dashboard />} />
           <Route path="/categories" element={<Category />} />
+          <Route path="/categories/:id" element={<CategoryView />} />
         </Route>
         <Route path="/login" element={<Login />} />
       </Routes>
