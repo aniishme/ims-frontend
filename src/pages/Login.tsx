@@ -35,7 +35,7 @@ function Login() {
     if (isSuccess) {
       navigate("/");
     }
-  }, []);
+  }, [isSuccess]);
 
   const form = useForm({
     initialValues: {
