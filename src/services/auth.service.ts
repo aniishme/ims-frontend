@@ -4,6 +4,12 @@ type LoginData = {
   username: string;
   password: string;
 };
+export type RegisterData = {
+  name: string;
+  username: string;
+  password: string;
+  role: string;
+};
 
 export const loginHandler = async (data: LoginData) => {
   const res = await api.post("/auth/login", data);
@@ -17,4 +23,8 @@ export const isLoggedIn = async () => {
 
 export const logout = async () => {
   return await api.get("/auth/logout");
+};
+
+export const createUser = async (data: RegisterData) => {
+  const res = await api.post("/auth/register", data);
 };
