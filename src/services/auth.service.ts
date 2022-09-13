@@ -1,4 +1,4 @@
-import axios from "axios";
+import { api } from "../utils/api";
 
 type LoginData = {
   username: string;
@@ -6,15 +6,11 @@ type LoginData = {
 };
 
 export const loginHandler = async (data: LoginData) => {
-  const res = await axios.post("http://localhost:8000/auth/login", data, {
-    withCredentials: true,
-  });
+  const res = await api.post("/auth/login", data);
 
   return res;
 };
 
 export const isLoggedIn = async () => {
-  return await axios.get("http://localhost:8000/auth/me", {
-    withCredentials: true,
-  });
+  return await api.get("/auth/me");
 };

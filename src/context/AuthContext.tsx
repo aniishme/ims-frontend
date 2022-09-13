@@ -1,34 +1,42 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { isLoggedIn } from "../services/auth.service";
 
 type PropType = {
   children: React.ReactNode;
 };
 
+type User = {
+  id: string;
+  name: string;
+  username: string;
+  role: string;
+};
+
 export interface AuthContextType {
-  auth: boolean;
-  setAuth: (auth: boolean) => void;
+  isSuccess: boolean;
   isLoading: boolean;
+  isError: boolean;
+  user: User;
 }
 
 export const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }: PropType) => {
-  const { data, isLoading, isError } = useQuery(["auth"], isLoggedIn);
-  const [auth, setAuth] = useState<boolean>(false);
+  const { data, isLoading, isSuccess, isError } = useQuery(
+    ["auth"],
+    isLoggedIn
+  );
 
-  useEffect(() => {
-    if (data?.status === 200) {
-      setAuth(true);
-    }
-    if (isError) {
-      setAuth(false);
-    }
-  }, [data, isError]);
   return (
-    <AuthContext.Provider value={{ auth, setAuth, isLoading }}>
+    <AuthContext.Provider
+      value={{ isSuccess, isError, isLoading, user: data?.data }}
+    >
       {children}
     </AuthContext.Provider>
   );
+};
+
+export const useAuth = () => {
+  return useContext(AuthContext) as AuthContextType;
 };

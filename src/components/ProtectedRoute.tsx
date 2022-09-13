@@ -1,11 +1,11 @@
-import { useContext } from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import { AuthContext, AuthContextType } from "../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 
 function ProtectedRoute() {
-  const { auth } = useContext(AuthContext) as AuthContextType;
+  const { isSuccess } = useAuth();
+  console.log(isSuccess);
 
-  return auth ? <Outlet /> : <Navigate to="/login" />;
+  return isSuccess ? <Outlet /> : <Navigate to="/login" />;
 }
 
 export default ProtectedRoute;
