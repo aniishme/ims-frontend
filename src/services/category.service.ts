@@ -4,12 +4,20 @@ export type CategoryData = {
   name: string;
 };
 
-type CategoryDataWithId = CategoryData & {
-  id: number;
+export type IDType = {
+  id: string | undefined;
 };
+
+type CategoryDataWithId = CategoryData & IDType;
 
 export const getCategory = async () => {
   const res = await api.get("/category/");
+
+  return res;
+};
+
+export const getCategoryById = async (data: IDType) => {
+  const res = await api.get(`/category/${data.id}`);
 
   return res;
 };
@@ -28,7 +36,7 @@ export const editCategory = async (data: CategoryDataWithId) => {
   return res;
 };
 
-export const deleteCategory = async (data: { id: number }) => {
+export const deleteCategory = async (data: IDType) => {
   const res = api.delete(`/category/${data.id}`);
 
   return res;
