@@ -1,28 +1,22 @@
 import { Button, Loader, Table } from "@mantine/core";
-import { useContext, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 
 import Navbar from "../components/Navbar";
 import ManageCategory from "../components/ManageCategory";
 
-import {
-  CategoryContext,
-  CategoryContextType,
-} from "../context/CategoryContext";
 import CategoryTableRow from "../components/CategoryTableRow";
+import { useCategory } from "../hooks/useCategory";
 
 function Category() {
-  const { isLoading, isSuccess, data } = useContext(
-    CategoryContext
-  ) as CategoryContextType;
+  const category = useCategory();
 
   return (
     <>
       <Navbar />
       <div className="category">
         <ManageCategory />
-        {isLoading && <Loader />}
-        {isSuccess && (
+        {category.isLoading && <Loader />}
+        {category.isSuccess && (
           <Table verticalSpacing={"md"} striped highlightOnHover>
             <thead>
               <tr>
@@ -33,7 +27,7 @@ function Category() {
               </tr>
             </thead>
             <tbody>
-              {data?.map((category: any, index: number) => {
+              {category.data?.data.map((category: any, index: number) => {
                 return (
                   <CategoryTableRow
                     category={category}
