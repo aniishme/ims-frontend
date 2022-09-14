@@ -10,9 +10,9 @@ function ItemTableRow({ item, index }: PropType) {
     <tr>
       <td>{index + 1}</td>
       <td>{item.name}</td>
-      <td>{item.price}</td>
+      <td>${item.price}</td>
       <td>
-        <img src={item.imageUrl} />
+        <img src={item.imageUrl} width="50" height="50" />
       </td>
       <td>{item.category.name}</td>
     </tr>
