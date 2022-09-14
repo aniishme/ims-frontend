@@ -1,5 +1,5 @@
-import { Loader, Table } from "@mantine/core";
-import React from "react";
+import { Button, Loader, Table } from "@mantine/core";
+import React, { useState } from "react";
 import ItemTableRow from "../components/ItemTableRow";
 import ManageItems from "../components/ManageItems";
 import Navbar from "../components/Navbar";
@@ -7,11 +7,20 @@ import { useItem } from "../hooks/useItem";
 
 function Items() {
   const item = useItem();
+  const [create, setCreate] = useState(false);
+
+  const handleManageItems = () => {
+    setCreate(!create);
+  };
   return (
     <>
       <Navbar />
       <div className="items">
-        <ManageItems />
+        <Button onClick={handleManageItems} color="blue">
+          {create ? "Cancel" : "Create"}
+        </Button>
+        {create && <ManageItems />}
+
         {item.isLoading && <Loader />}
         {item.isSuccess && (
           <Table verticalSpacing={"md"} striped highlightOnHover>
