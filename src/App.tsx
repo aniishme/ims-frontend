@@ -8,6 +8,7 @@ import Category from "./pages/Category";
 import { useAuth } from "./context/AuthContext";
 import CategoryView from "./pages/CategoryView";
 import Register from "./pages/Register";
+import Items from "./pages/Items";
 
 function App() {
   const { isLoading } = useAuth();
@@ -21,6 +22,7 @@ function App() {
       <Routes>
         <Route element={<ProtectedRoute />}>
           <Route path="/" element={<Dashboard />} />
+          <Route path="/products" element={<Items />} />
           <Route path="/categories" element={<Category />} />
           <Route path="/categories/:id" element={<CategoryView />} />
           <Route path="/users" element={<Register />} />
