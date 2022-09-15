@@ -41,7 +41,8 @@ body {
   cursor: pointer;
 }
 
-.category {
+.category,
+.items {
   padding: 15px 50px;
 }
 
