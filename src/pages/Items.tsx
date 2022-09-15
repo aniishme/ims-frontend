@@ -14,7 +14,6 @@ function Items() {
   };
   return (
     <>
-      <Navbar />
       <div className="items">
         <Button onClick={handleManageItems} color="blue">
           {create ? "Cancel" : "Create"}

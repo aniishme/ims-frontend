@@ -1,6 +1,6 @@
 import { Button } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { logout } from "../services/auth.service";
 import { useNavigate } from "react-router-dom";
@@ -20,23 +20,26 @@ function Navbar() {
     refetch();
   };
   return (
-    <div className="navbar">
-      <div className="nav-links">
-        <Link to="/">Dashboard</Link>
-        <Link to="/products">Products</Link>
-        <Link to="/categories">Categories</Link>
-        <Link to="/users">Users</Link>
-      </div>
-      <div className="nav-user">
-        <p>
-          {user?.username} | {user?.role?.toLowerCase()}
-        </p>
+    <>
+      <div className="navbar">
+        <div className="nav-links">
+          <Link to="/">Dashboard</Link>
+          <Link to="/products">Products</Link>
+          <Link to="/categories">Categories</Link>
+          <Link to="/users">Users</Link>
+        </div>
+        <div className="nav-user">
+          <p>
+            {user?.username} | {user?.role?.toLowerCase()}
+          </p>
 
-        <Button variant="outline" color="red" onClick={handleLogout}>
-          Logout
-        </Button>
+          <Button variant="outline" color="red" onClick={handleLogout}>
+            Logout
+          </Button>
+        </div>
       </div>
-    </div>
+      <Outlet />
+    </>
   );
 }
 

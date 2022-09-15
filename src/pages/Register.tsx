@@ -52,7 +52,6 @@ function Register() {
 
   return (
     <>
-      <Navbar />
       <Box sx={{ maxWidth: 300 }} mx="auto">
         <Title order={3} mb={20} my={50}>
           Create a new User
