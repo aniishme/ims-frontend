@@ -30,6 +30,7 @@ function Items() {
                 <th>Price</th>
                 <th>Image</th>
                 <th>Category</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
