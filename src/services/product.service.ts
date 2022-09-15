@@ -18,3 +18,9 @@ export const createItem = async (data: ItemRequestType) => {
 
   return res;
 };
+
+export const deleteItem = async (data: { id: string }) => {
+  const res = await api.delete(`/item/${data.id}`);
+
+  return res;
+};
