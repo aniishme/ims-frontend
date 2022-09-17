@@ -57,6 +57,7 @@ body {
   text-decoration: none;
 }
 
-.category-wrapper {
+.category-wrapper,
+.item-wrapper {
   padding: 15px 50px;
 }

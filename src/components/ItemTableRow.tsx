@@ -2,6 +2,7 @@ import { Button, Loader } from "@mantine/core";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import React from "react";
+import { Link } from "react-router-dom";
 import { deleteItem } from "../services/product.service";
 
 type PropType = {
@@ -30,7 +31,9 @@ function ItemTableRow({ item, index }: PropType) {
   return (
     <tr>
       <td>{index + 1}</td>
-      <td>{item.name}</td>
+      <td>
+        <Link to={item.id}>{item.name}</Link>
+      </td>
       <td>${item.price}</td>
       <td>
         <img src={item.imageUrl} width="50" height="50" />
