@@ -12,6 +12,11 @@ export const getItem = async () => {
 
   return res;
 };
+export const getItemById = async (data: { id: string | undefined }) => {
+  const res = await api.get(`/item/${data.id}`);
+
+  return res;
+};
 
 export const createItem = async (data: ItemRequestType) => {
   const res = await api.post("/item/", data);
