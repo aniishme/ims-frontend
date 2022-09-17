@@ -11,6 +11,7 @@ import Register from "./pages/Register";
 import Items from "./pages/Items";
 import Navbar from "./components/Navbar";
 import Item from "./pages/Item";
+import EditItem from "./components/EditItem";
 
 function App() {
   const { isLoading } = useAuth();
@@ -26,7 +27,9 @@ function App() {
           <Route path="/" element={<Navbar />}>
             <Route path="/" element={<Dashboard />} />
             <Route path="/products" element={<Items />} />
-            <Route path="/products/:id" element={<Item />} />
+            <Route path="/products/:id" element={<Item />}>
+              <Route path="edit" element={<EditItem />} />
+            </Route>
             <Route path="/categories" element={<Category />} />
             <Route path="/categories/:id" element={<CategoryView />} />
             <Route path="/users" element={<Register />} />
