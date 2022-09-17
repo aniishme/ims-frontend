@@ -3,7 +3,7 @@ import { api } from "../utils/api";
 export type ItemRequestType = {
   name: string;
   price: number;
-  image: string;
+  image?: string;
   categoryId: string;
 };
 
@@ -14,6 +14,15 @@ export const getItem = async () => {
 };
 export const getItemById = async (data: { id: string | undefined }) => {
   const res = await api.get(`/item/${data.id}`);
+
+  return res;
+};
+
+export const updateItem = async (data: {
+  payload: ItemRequestType;
+  id: string | undefined;
+}) => {
+  const res = await api.put(`/item/${data.id}`, data.payload);
 
   return res;
 };
