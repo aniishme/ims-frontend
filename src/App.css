@@ -1,6 +1,9 @@
 body {
   font-family: "Courier New", Courier, monospace;
 }
+* {
+  text-decoration: none;
+}
 .navbar {
   display: flex;
   padding: 15px 50px;
@@ -57,6 +60,49 @@ body {
   text-decoration: none;
 }
 
-.category-wrapper {
+.category-wrapper,
+.item-wrapper {
+  padding: 15px 50px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.edit-item {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+}
+.edit-item input {
+  padding: 10px;
+}
+
+.edit-item select {
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.users-links {
+  padding: 15px 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.users-links a {
+  margin-right: 20px;
+}
+
+.userlist-wrapper {
   padding: 15px 50px;
 }

@@ -11,7 +11,6 @@ function CategoryView() {
   const data = category.data?.data;
   return (
     <>
-      <Navbar />
       <div className="category-wrapper">
         <h1>Name: {data?.name}</h1>
         {data?.items.length === 0

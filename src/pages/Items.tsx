@@ -14,15 +14,14 @@ function Items() {
   };
   return (
     <>
-      <Navbar />
       <div className="items">
         <Button onClick={handleManageItems} color="blue">
           {create ? "Cancel" : "Create"}
         </Button>
         {create && <ManageItems />}
 
-        {item.isLoading && <Loader />}
-        {item.isSuccess && (
+        {item?.isLoading && <Loader />}
+        {item?.isSuccess && (
           <Table verticalSpacing={"md"} striped highlightOnHover>
             <thead>
               <tr>
@@ -31,6 +30,7 @@ function Items() {
                 <th>Price</th>
                 <th>Image</th>
                 <th>Category</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>

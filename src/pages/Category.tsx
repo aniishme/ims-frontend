@@ -12,7 +12,6 @@ function Category() {
 
   return (
     <>
-      <Navbar />
       <div className="category">
         <ManageCategory />
         {category.isLoading && <Loader />}
