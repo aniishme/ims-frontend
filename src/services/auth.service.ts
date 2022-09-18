@@ -34,3 +34,7 @@ export const getAllUsers = async () => {
   const res = await api.get("/auth/users");
   return res;
 };
+
+export const deleteUsers = async (data: { id: string }) => {
+  const res = await api.delete(`/auth/users/${data.id}`);
+};
