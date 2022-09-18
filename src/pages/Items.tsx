@@ -20,8 +20,8 @@ function Items() {
         </Button>
         {create && <ManageItems />}
 
-        {item.isLoading && <Loader />}
-        {item.isSuccess && (
+        {item?.isLoading && <Loader />}
+        {item?.isSuccess && (
           <Table verticalSpacing={"md"} striped highlightOnHover>
             <thead>
               <tr>
