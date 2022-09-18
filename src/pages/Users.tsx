@@ -1,7 +1,16 @@
-import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, Outlet, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 function Users() {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user.role !== "ADMIN") {
+      navigate("/");
+    }
+  });
   return (
     <>
       <div className="users-links">
