@@ -27,4 +27,10 @@ export const logout = async () => {
 
 export const createUser = async (data: RegisterData) => {
   const res = await api.post("/auth/register", data);
+  return res;
+};
+
+export const getAllUsers = async () => {
+  const res = await api.get("/auth/users");
+  return res;
 };
