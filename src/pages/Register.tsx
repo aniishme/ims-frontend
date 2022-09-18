@@ -10,12 +10,13 @@ import {
   Title,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import Navbar from "../components/Navbar";
 import { createUser, RegisterData } from "../services/auth.service";
 
 function Register() {
+  const queryClient = useQueryClient();
   const form = useForm({
     initialValues: {
       name: "",
@@ -46,6 +47,7 @@ function Register() {
     register(data, {
       onSuccess: () => {
         form.reset();
+        queryClient.invalidateQueries(["get-users"]);
       },
     });
   };
