@@ -1,6 +1,9 @@
 body {
   font-family: "Courier New", Courier, monospace;
 }
+* {
+  text-decoration: none;
+}
 .navbar {
   display: flex;
   padding: 15px 50px;
@@ -87,4 +90,19 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type="number"] {
   -moz-appearance: textfield;
+}
+
+.users-links {
+  padding: 15px 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.users-links a {
+  margin-right: 20px;
+}
+
+.userlist-wrapper {
+  padding: 15px 50px;
 }

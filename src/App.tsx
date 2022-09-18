@@ -12,6 +12,8 @@ import Items from "./pages/Items";
 import Navbar from "./components/Navbar";
 import Item from "./pages/Item";
 import EditItem from "./components/EditItem";
+import Users from "./pages/Users";
+import UsersList from "./pages/UsersList";
 
 function App() {
   const { isLoading } = useAuth();
@@ -32,7 +34,10 @@ function App() {
             </Route>
             <Route path="/categories" element={<Category />} />
             <Route path="/categories/:id" element={<CategoryView />} />
-            <Route path="/users" element={<Register />} />
+            <Route path="/users" element={<Users />}>
+              <Route path="register" element={<Register />} />
+              <Route path="all" element={<UsersList />} />
+            </Route>
           </Route>
         </Route>
         <Route path="/login" element={<Login />} />
